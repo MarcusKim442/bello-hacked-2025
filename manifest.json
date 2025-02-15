@@ -1,0 +1,16 @@
+{
+    "name": "Hallucination Tagger",
+    "version": "0.0.1",
+    "description": "An extension to identify source of its content to identify its credibility",
+    "manifest_version": 3,
+    "permissions": ["tabs"],
+    "icons": {
+
+    }, 
+    "action": {
+        "default_icon": {
+
+        },
+        "default_popup": "hallucination.html"
+    }
+}
