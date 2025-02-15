@@ -21,14 +21,7 @@ function send_to_tool(text) {
     }
 }
 
-function display_text(text){
-    if (text){
-        const output = document.getElementById("outputarea");
-        output.value = text;
-    }else{
-        alert ("No Text Found")
-    }
-}
+
 
 document.addEventListener("DOMContentLoaded", function () {
     const button = document.getElementById("check");
