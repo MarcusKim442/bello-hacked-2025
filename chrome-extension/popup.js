@@ -1,5 +1,3 @@
-alert ("Extension is currently running");
-
 function fetch_input(Input_id){
     let input = document.getElementById(Input_id);
     if (input){
