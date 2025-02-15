@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
     button.addEventListener("click", () => {
         let input_text = fetch_input("userInput"); 
         send_to_tool(input_text); 
+        //add text to textbox input text
     });
     
 });
