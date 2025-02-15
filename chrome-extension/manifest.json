@@ -11,7 +11,7 @@
         "default_icon": {
 
         },
-        "default_popup": "hallucination.html"
+        "default_popup": "popup.html"
     },
     "background": {
         "service_worker": "background.js"
