@@ -12,7 +12,7 @@ function fetch_input(Input_id){
 
 function send_to_tool(text) {
     if (text){
-        chrome.runtime.sendMessage({ action: "processText", data: text }, (response) => {
+        chrome.runtime.sendMessage({ action: "sendTextToLLM", text: text }, (response) => {
         console.log("Response from background:", response);
         });
     } 
