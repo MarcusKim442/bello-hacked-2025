@@ -9,8 +9,13 @@ function fetch_input(Input_id){
         return null;
     }
 }
+
 function send_to_tool(text){
-    
+    if (text){
+        //idk
+    } else {
+        alert ("Text Not Found")
+    }
 }
 
 
