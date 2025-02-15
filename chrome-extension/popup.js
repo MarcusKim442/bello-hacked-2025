@@ -11,11 +11,13 @@ function fetch_input(Input_id){
 function send_to_tool(text) {
     if (text){
         chrome.runtime.sendMessage({ action: "sendTextToLLM", text: text }, (response) => {
-        console.log("Response from background:", response);
+            console.log("Response from background:", response);
+            let capitalizedText = text.toUpperCase(); // capitalizes input text
+            document.getElementById("outputarea").textContent = capitalizedText;
         });
     } 
     else {
-        alert ("Text Not Found");
+        alert("Text Not Found");
     }
 }
 
@@ -27,7 +29,6 @@ function display_text(text){
         alert ("No Text Found")
     }
 }
-
 
 document.addEventListener("DOMContentLoaded", function () {
     const button = document.getElementById("check");
