@@ -14,7 +14,7 @@ function send_to_tool(text) {
             console.log("Response from background:", response);
             let capitalizedText = text.toUpperCase(); // capitalizes input text
             let output = response.response; //placeholder for output
-            document.getElementById("outputarea").textContent = capitalizedText;
+            document.getElementById("outputarea").textContent = capitalizedText; //change to output later, capitalizedtext placeholder for output
         });
     } 
     else {
