@@ -3,11 +3,16 @@ import cors from "cors";
 import dotenv from "dotenv";
 import OpenAI from "openai";
 
-// Load environment variables
-dotenv.config();
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
-// Debugging: Check if API key is loaded
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+// Load .env from the correct location
+dotenv.config({ path: `${__dirname}/.env` });
+
 console.log("API Key Loaded:", process.env.OPENAI_API_KEY ? "Found" : "Not Found");
+
 
 const app = express();
 app.use(cors());
@@ -41,10 +46,32 @@ app.post("/extract-claims", async (req, res) => {
         
         Extracted Claims (one per line):`;
 
-        const response = await openai.chat.completions.create({
-            model: "gpt-4",
-            messages: [{ role: "system", content: "You are a claim extraction assistant." }, { role: "user", content: prompt }]
-        });
+        try {
+            const response = await openai.chat.completions.create({
+                model: "gpt-4",
+                messages: [{ role: "system", content: "You are a claim extraction assistant." }, { role: "user", content: prompt }]
+            });
+        
+            console.log("Raw OpenAI Response:", response); // Debugging
+        
+            if (!response || !response.choices || response.choices.length === 0) {
+                console.error("Error: Invalid response from OpenAI");
+                return res.status(500).json({ error: "OpenAI API did not return any claims" });
+            }
+        
+            console.log("Extracted Claims:", response.choices[0].message.content);
+        
+            const claims = response.choices[0].message.content.split("\n").filter(c => c.trim());
+            res.status(200).json({ claims });
+        
+        } catch (error) {
+            console.error("OpenAI API Error:", error);
+            res.status(500).json({ error: "Failed to extract claims", details: error.message });
+        }
+        
+        
+        
+        
 
         console.log("OpenAI Response:", response.choices[0].message.content); // Debugging
 
