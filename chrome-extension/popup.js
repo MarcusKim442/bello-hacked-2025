@@ -10,12 +10,14 @@ function fetch_input(Input_id){
     }
 }
 
-function send_to_tool(text){
+function send_to_tool(text) {
     if (text){
         chrome.runtime.sendMessage({ action: "processText", data: text }, (response) => {
         console.log("Response from background:", response);
-    } else {
-        alert ("Text Not Found")
+        });
+    } 
+    else {
+        alert ("Text Not Found");
     }
 }
 
