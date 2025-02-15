@@ -10,7 +10,8 @@ function fetch_input(Input_id){
     }
 }
 
-let input_text = fetch_input(input_id)
+let input_text = fetch_input(userInput);
+
 
 
 
