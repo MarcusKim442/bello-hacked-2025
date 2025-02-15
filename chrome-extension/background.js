@@ -1,6 +1,7 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse)=> {
     if (request.action === "sendTextToLLM") {
-        const userText = request.Text;
+        const userText = request.text;
+        
         //for LLM API stuff 
         //call API response
         setTimeout(() => {
