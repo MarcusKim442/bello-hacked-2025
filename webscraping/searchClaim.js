@@ -1,6 +1,8 @@
-const API_KEY = "AIzaSyC8rtOmZM-4-9nFqQStnyNNgl2Bg8BoSE8";
-const CX = "11e9e8e5098254a19";
-const QUERY = "is pneumonia contagious?"; // Change this to your search term
+require("dotenv").config();
+
+const API_KEY = process.env.WEB_SCRAPING_API_KEY;
+const CX = process.env.WEB_SCRAPING_CX;
+const QUERY = "bananas are healthy"; // Change this to your search term
 
 const url = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(
   QUERY
