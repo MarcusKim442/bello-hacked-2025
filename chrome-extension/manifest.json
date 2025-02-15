@@ -12,5 +12,8 @@
 
         },
         "default_popup": "hallucination.html"
+    },
+    "background": {
+        "service_worker": "background.js"
     }
 }
