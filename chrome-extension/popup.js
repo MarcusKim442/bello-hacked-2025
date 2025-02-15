@@ -13,6 +13,7 @@ function send_to_tool(text) {
         chrome.runtime.sendMessage({ action: "sendTextToLLM", text: text }, (response) => {
             console.log("Response from background:", response);
             let capitalizedText = text.toUpperCase(); // capitalizes input text
+            let output = response.response; //placeholder for output
             document.getElementById("outputarea").textContent = capitalizedText;
         });
     } 
