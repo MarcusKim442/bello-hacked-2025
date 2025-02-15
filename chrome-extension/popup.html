@@ -25,6 +25,14 @@
         button:hover {
             background-color: #e6ccff;
         }
+        #outputarea {
+            margin-top: 10px;
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+            border: 2px solid #9ec4e1;
+            overflow-y: auto; /* content no overflow*/
+        }
     </style>
 </head>
 <body>
@@ -32,6 +40,7 @@
     <h2>Input Text to Fact Check</h2>
     <textarea id="userInput" placeholder="Enter text..."></textarea>
     <button id="check">SEARCH</button>
+    <div id="outputarea" contenteditable="true" readonly placeholder="Sources..."></div>
     <script src="popup.js"></script>
 </body>    
 </html>

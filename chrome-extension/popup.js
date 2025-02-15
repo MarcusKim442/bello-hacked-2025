@@ -11,22 +11,32 @@ function fetch_input(Input_id){
 function send_to_tool(text) {
     if (text){
         chrome.runtime.sendMessage({ action: "sendTextToLLM", text: text }, (response) => {
-        console.log("Response from background:", response);
+            console.log("Response from background:", response);
+            let capitalizedText = text.toUpperCase(); // capitalizes input text
+            document.getElementById("outputarea").textContent = capitalizedText;
         });
     } 
     else {
-        alert ("Text Not Found");
+        alert("Text Not Found");
     }
 }
 
-
+function display_text(text){
+    if (text){
+        const output = document.getElementById("outputarea");
+        output.value = text;
+    }else{
+        alert ("No Text Found")
+    }
+}
 
 document.addEventListener("DOMContentLoaded", function () {
     const button = document.getElementById("check");
     button.addEventListener("click", () => {
         let input_text = fetch_input("userInput"); 
         send_to_tool(input_text); 
-        //add text to textbox input text
+        
+        
     });
     
 });
