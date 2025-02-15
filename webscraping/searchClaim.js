@@ -1,19 +1,71 @@
 require("dotenv").config();
+const cheerio = require("cheerio");
 
-const API_KEY = process.env.WEB_SCRAPING_API_KEY;
-const CX = process.env.WEB_SCRAPING_CX;
-const QUERY = "bananas are healthy"; // Change this to your search term
+const sampleClaim = "bananas are healthy for you";
 
-const url = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(
-  QUERY
-)}&key=${API_KEY}&cx=${CX}`;
+async function getResults(claim = sampleClaim) {
+  const API_KEY = process.env.WEB_SCRAPING_API_KEY;
+  const CX = process.env.WEB_SCRAPING_CX;
 
-fetch(url)
-  .then((response) => response.json())
-  .then((data) => {
-    console.log("Search Results:", data.items);
-    data.items.forEach((item, index) => {
-      console.log(`${index + 1}. ${item.title} - ${item.link}`);
-    });
-  })
-  .catch((error) => console.error("Error fetching search results:", error));
+  const url = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(
+    claim
+  )}&key=${API_KEY}&cx=${CX}`;
+
+  try {
+    const response = await fetch(url); // Wait for the fetch to complete
+    const data = await response.json(); // Wait for the JSON parsing to complete
+    const ret = [];
+    for (const item of data.items) {
+      const pageContent = await fetchPage(item.link); // Fetch full page content
+      const text = extractRelevantText(pageContent);
+      const res = {
+        title: item.title,
+        link: item.link,
+        snippet: item.snippet,
+        text: text,
+      };
+      ret.push(res);
+    }
+    return ret; // Return the final result
+  } catch (error) {
+    console.error("Error fetching search results:", error);
+    throw error; // Re-throw the error to handle it in the calling function
+  }
+}
+
+async function fetchPage(url) {
+  try {
+    const response = await fetch(url);
+    const html = await response.text();
+    return html;
+  } catch (error) {
+    console.error(`Error fetching page content from ${url}:`, error);
+    return null;
+  }
+}
+
+function extractRelevantText(html) {
+  if (!html) return null;
+  const $ = cheerio.load(html);
+  $("script, style, noscript, iframe, header, footer").remove();
+  const text = $("html *")
+    .contents()
+    .map(function () {
+      return this.type === "text" ? $(this).text() : "";
+    })
+    .get()
+    .join(" ");
+
+  const cleanedText = text.replace(/\s+/g, " ").trim();
+  return cleanedText.slice(0, 1000);
+}
+
+async function main() {
+  try {
+    const data = await getResults();
+    console.log(data);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+main();
