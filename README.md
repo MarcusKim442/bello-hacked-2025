@@ -3,6 +3,6 @@
 ## Team Members
 - Grace Shin
 - Sarang Kim
-- Taeehun Lee
+- Taehun Lee
 - Marcus Kim
 - Karina Zhang
