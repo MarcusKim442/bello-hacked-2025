@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="stylesheet" href="popup.css">
 <head>
+    <link rel="stylesheet" href="popup.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
@@ -31,16 +31,13 @@
             height: 100px;
             margin-bottom: 10px;
             border: 2px solid #9ec4e1;
-            overflow-y: auto; /* content no overflow*/
+            overflow-y: auto;
         }
     </style>
 </head>
 <body>
-    <img src="" id="projectimage">
     <h2>Input Text to Fact Check</h2>
     <textarea id="userInput" placeholder="Enter text..."></textarea>
     <button id="check">SEARCH</button>
-    <div id="outputarea" contenteditable="true" readonly placeholder="Sources..."></div>
-    <script src="popup.js"></script>
-</body>    
-</html>
+    <div id="outputarea" contenteditable="true" readonly></div>
+
