@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "FactCheck Assistant",
-  "version": "1.0",
+  "name": "Hallucination Tagger",
+  "version": "0.0.1",
   "permissions": ["storage", "activeTab", "scripting"],
   "host_permissions": ["http://localhost:5000/*"],
   "background": {
