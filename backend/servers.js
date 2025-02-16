@@ -17,7 +17,9 @@ console.log("API Key Loaded:", process.env.OPENAI_API_KEY ? "Found" : "Not Found
 
 const app = express();
 app.use(cors({
-    origin: "http://localhost:3000/"  // Allows requests from this frontend
+    origin: ["http://localhost:3000", "chrome-extension://*"], // Allows requests from frontend & Chrome Extension
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"]
 }));
 
 app.use(express.json());
@@ -51,11 +53,9 @@ app.post("/extract-claims", async (req, res) => {
         Extracted Claims (one per line):`;
 
         const response = await openai.chat.completions.create({
-            model: "gpt-3.5-turbo",  // Change to GPT-3.5 if GPT-4 is unavailable
+            model: "gpt-3.5-turbo",
             messages: [{ role: "system", content: "You are a claim extraction assistant." }, { role: "user", content: prompt }]
         });
-
-        // console.log("OpenAI Response:", response); // Debugging
 
         if (!response || !response.choices || response.choices.length === 0) {
             console.error("Error: Invalid response from OpenAI");
@@ -63,15 +63,19 @@ app.post("/extract-claims", async (req, res) => {
         }
 
         const claims_ = response.choices[0].message.content.split("\n").filter(c => c.trim());
-        // res.status(200).json({ claims });
-        
+
+        if (claims_.length === 0) {
+            return res.status(200).json({ claims: ["No valid claims found."] });
+        }
+
+        // Process first extracted claim
         const data = await ws.labelClaim(claims_[0]);
         const claims = [
             `Claim: ${claims_[0]}`,
             `${data.summary}`,
             `Source: ${data.link}`
-        ]
-        
+        ];
+
         res.status(200).json({ claims });
 
     } catch (error) {

@@ -1,13 +1,22 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "extractClaims") {
-        console.log("Received text from content.js:", request.text); // Debugging
+        console.log("Received highlighted text:", request.text); // Debugging
 
+        // Store the selected text
+        chrome.storage.local.set({ selectedText: request.text });
+
+        // Call the API to extract claims
         fetch("http://localhost:5000/extract-claims", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ text: request.text })
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
             console.log("API Response:", data); // Debugging
             if (data.error) {
@@ -20,8 +29,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         })
         .catch(error => {
             console.error("Error calling API:", error);
-            sendResponse({ success: false, message: "API request failed." });
+            sendResponse({ success: false, message: `API request failed: ${error.message}` });
         });
+
+        // Open the extension popup
+        chrome.action.openPopup();
 
         return true; // Keeps the message channel open for async response
     }
