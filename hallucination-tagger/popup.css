@@ -1,0 +1,113 @@
+*{
+    font-family: "Be Vietnam Pro", serif;
+    font-weight: 400;
+    font-style: normal;
+   }
+   html, body {
+     
+     border-radius: 25px;
+     font-family: "Be Vietnam Pro", serif;
+     font-weight: 300;
+     font-style: normal;
+     width: 300px;
+     padding: 5px;
+     
+   }
+   
+   h2 {
+     font-family: "Be Vietnam Pro", serif;
+     font-weight: 600;
+     width: 100%;
+     text-align: center;
+     color: #013a63;
+     
+   }
+   
+   .input-container {
+     width: 100%;
+     margin: 0 auto;
+     text-align: center; 
+     max-width: 100%;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     padding: 10px;
+   }
+   
+   textarea, #outputarea, button {
+     width: 100%;
+     max-width: 100%;
+     box-sizing: border-box;
+   }
+   
+   .title {
+     width: 100%;
+     padding: 10px;
+     gap: 5.5px;
+     display: flex;
+     align-items: center;
+     margin-bottom: 10px;
+     justify-content: space-between;
+     width: 100%;
+   }
+   
+   .title h2, .title i{
+     line-height: 1;
+     flex-grow: 1;
+     margin: 0;
+     font-size: 22.5px;
+     text-align: center;
+     color: #013a63;
+     
+   }
+   
+   .title i {
+     line-height: 1;
+   }
+   
+   textarea {
+     width: 100%;
+     height: 100px;
+     margin-bottom: 10px;
+     border: 3px solid #9ec4e1;
+     border-radius: 15px;
+     padding: 10px;
+     color: #013a63;
+   }
+   
+   textarea:focus {
+     border: 2px solid #9ec4e1;
+     outline: none;
+   }
+   
+   #outputarea {
+     font-family: "Be Vietnam Pro", serif;
+     font-weight: 300;
+     font-style: normal;
+     color: #013a63;
+     margin-top: 10px;
+     width: 100%;
+     height: 100px;
+     margin-bottom: 10px;
+     border: 3px solid #9ec4e1;
+     overflow-y: auto; /* content no overflow*/
+     border-radius: 15px;
+     padding: 10px;
+   }
+   
+   button {
+     width: 100%;
+     padding: 10px;
+     background-color: #cce6ff;
+     color: white;
+     border: 3px solid #cce6ff;
+     cursor: pointer;
+     border-radius: 15px;
+     outline: none;
+   }
+   
+   button:hover {
+     background-color: #ffffff;
+     color: #cce6ff;
+     border: 2px solid #9ec4el;
+   }
