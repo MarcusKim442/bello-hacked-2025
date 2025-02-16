@@ -68,14 +68,21 @@ app.post("/extract-claims", async (req, res) => {
             return res.status(200).json({ claims: ["No valid claims found."] });
         }
 
-        // Process first extracted claim
         const data = await ws.labelClaim(claims_[0]);
+        // const claims = [
+        //     `Claim: ${claims_[0]}`,
+        //     `${data.summary}`,
+        //     `Source: ${data.link}`
+        // ]
         const claims = [
-            `Claim: ${claims_[0]}`,
-            `${data.summary}`,
-            `Source: ${data.link}`
-        ];
-
+            {
+                claim: claims_[0],
+                summary: data.summary,
+                link: data.link,
+                title: data.title,
+            }
+        ]
+        
         res.status(200).json({ claims });
 
     } catch (error) {

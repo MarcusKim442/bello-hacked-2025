@@ -59,28 +59,35 @@ Here is your input:
 `;
 
 async function getSource(claim, webResults) {
-  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-  var prompt = basePrompt;
-  prompt += `Claim: ${claim}\n`;
-  for (var i = 0; i < webResults.length; i++) {
-    prompt += `${i + 1}: ${webResults[i].snippet} ... ${webResults[i].text}\n`;
+  try {
+    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+    var prompt = basePrompt;
+    prompt += `Claim: ${claim}\n`;
+    for (var i = 0; i < webResults.length; i++) {
+      prompt += `${i + 1}: ${webResults[i].snippet} ... ${webResults[i].text}\n`;
+    }
+
+    // console.log(prompt);
+
+    const response = await openai.chat.completions.create({
+      model: "gpt-4",
+      messages: [
+        {
+          role: "system",
+          content:
+            "You are a robot assistant that should behave in a very deterministic manner.",
+        },
+        { role: "user", content: prompt },
+      ],
+    });
+
+    console.log("getsource: ", response.choices[0].message.content);
+
+    return response.choices[0].message.content;
+
+  } catch (error) {
+    console.error("Error:", error);
   }
-
-  // console.log(prompt);
-
-  const response = await openai.chat.completions.create({
-    model: "gpt-4",
-    messages: [
-      {
-        role: "system",
-        content:
-          "You are a robot assistant that should behave in a very deterministic manner.",
-      },
-      { role: "user", content: prompt },
-    ],
-  });
-
-  return response.choices[0].message.content;
 }
 
 // async function main() {

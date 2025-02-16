@@ -1,4 +1,7 @@
 function send_to_tool(text) {
+    const container = document.getElementById("claim-card-container");
+    container.innerHTML = ""
+
     if (text) {
         chrome.runtime.sendMessage({ action: "extractClaims", text: text }, (response) => {
             console.log("Response from background:", response);
@@ -13,13 +16,32 @@ function send_to_tool(text) {
             if (!response || !response.success) {
                 outputArea.textContent = response?.message || "Unknown error occurred.";
             } else {
-                outputArea.textContent = response.claims && response.claims.length > 0
-                    ? response.claims.join("\n")
-                    : "No claims found.";
+                // outputArea.textContent = response.claims && response.claims.length > 0
+                //     ? response.claims.join("\n")
+                //     : "No claims found.";
+                displayClaimLabels(response.claims); 
             }
         });
     } else {
         alert("Text Not Found");
+    }
+}
+
+function displayClaimLabels(data) {
+    console.log("displayClaimLabels", data)
+    try {
+        const container = document.getElementById("claim-card-container");
+        data.forEach((claim) => {
+            container.innerHTML += `
+                <div class="card">
+                    <h3>"${claim.claim}"</h3>
+                    <p>${claim.summary}</p>
+                    <a href="${claim.link}">${claim.title}</a>
+                </div>
+            `;
+        });
+    } catch (error) {
+        console.log(error)
     }
 }
 

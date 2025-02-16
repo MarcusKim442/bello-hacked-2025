@@ -16,11 +16,12 @@ async function getResults(claim) {
     const data = await response.json(); // Wait for the JSON parsing to complete
     const ret = [];
 
-    // console.log(`get search results: ${data.items}`)
+    console.log(`get search results: ${data.items}`)
 
     for (const item of data.items.slice(0, 3)) {
-      const pageContent = await fetchPage(item.link); // Fetch full page content
-      const text = extractRelevantText(pageContent);
+      // const pageContent = await fetchPage(item.link); // Fetch full page content
+      // const text = extractRelevantText(pageContent);
+      const text = "";
       const res = {
         title: item.title,
         link: item.link,
