@@ -101,6 +101,8 @@
      border-radius: 15px;
      padding: 10px;
      color: #013a63;
+     resize: none;
+     overflow-y: auto;
    }
    
    textarea:focus {
