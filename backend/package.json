@@ -1,7 +1,7 @@
 {
   "name": "factcheck-backend",
   "version": "1.0.0",
-  "type": "module",  
+  "type": "module",
   "main": "servers.js",
   "dependencies": {
     "cors": "^2.8.5",

@@ -1,7 +1,7 @@
 const sc = require("./searchClaim.js");
 const mce = require("./matchClaimEvidence.js");
 
-const sampleClaim = "the moon landing was faked by the american government";
+module.exports = { labelClaim };
 
 async function labelClaim(claim) {
   const webResults = await sc.getResults(claim);
@@ -19,14 +19,15 @@ async function labelClaim(claim) {
   };
 }
 
-async function main() {
-  console.log(`Claim: ${sampleClaim}`);
-  try {
-    const data = await labelClaim(sampleClaim);
-    console.log(data);
-  } catch (error) {
-    console.error("Error:", error);
-  }
-}
+// async function main() {
+//   const sampleClaim = "the moon landing was faked by the american government";
+//   console.log(`Claim: ${sampleClaim}`);
+//   try {
+//     const data = await labelClaim(sampleClaim);
+//     console.log(data);
+//   } catch (error) {
+//     console.error("Error:", error);
+//   }
+// }
 
-main();
+// main();

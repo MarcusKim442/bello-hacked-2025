@@ -1,3 +1,5 @@
+import ws from "../webscraping/webscrapingFuncs.js";
+
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -53,14 +55,23 @@ app.post("/extract-claims", async (req, res) => {
             messages: [{ role: "system", content: "You are a claim extraction assistant." }, { role: "user", content: prompt }]
         });
 
-        console.log("OpenAI Response:", response); // Debugging
+        // console.log("OpenAI Response:", response); // Debugging
 
         if (!response || !response.choices || response.choices.length === 0) {
             console.error("Error: Invalid response from OpenAI");
             return res.status(500).json({ error: "OpenAI API did not return any claims" });
         }
 
-        const claims = response.choices[0].message.content.split("\n").filter(c => c.trim());
+        const claims_ = response.choices[0].message.content.split("\n").filter(c => c.trim());
+        // res.status(200).json({ claims });
+        
+        const data = await ws.labelClaim(claims_[0]);
+        const claims = [
+            `Claim: ${claims_[0]}`,
+            `${data.summary}`,
+            `Source: ${data.link}`
+        ]
+        
         res.status(200).json({ claims });
 
     } catch (error) {

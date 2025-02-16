@@ -3,8 +3,6 @@ module.exports = { getResults };
 require("dotenv").config();
 const cheerio = require("cheerio");
 
-const sampleClaim = "the university of alberta is a top 10 university";
-
 async function getResults(claim) {
   const API_KEY = process.env.WEB_SCRAPING_API_KEY;
   const CX = process.env.WEB_SCRAPING_CX;
@@ -17,6 +15,9 @@ async function getResults(claim) {
     const response = await fetch(url); // Wait for the fetch to complete
     const data = await response.json(); // Wait for the JSON parsing to complete
     const ret = [];
+
+    // console.log(`get search results: ${data.items}`)
+
     for (const item of data.items.slice(0, 3)) {
       const pageContent = await fetchPage(item.link); // Fetch full page content
       const text = extractRelevantText(pageContent);
@@ -63,6 +64,7 @@ function extractRelevantText(html) {
 }
 
 // async function main() {
+// const sampleClaim = "the university of alberta is a top 10 university";
 //   try {
 //     const data = await getResults(sampleClaim);
 //     console.log(data);
