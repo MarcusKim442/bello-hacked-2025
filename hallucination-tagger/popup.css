@@ -112,7 +112,7 @@ background-color: #FDFDF1;
  }
  
  textarea:focus {
-   border: 2px solid #F2EFC7;
+   border: 4px solid #F2EFC7;
    outline: none;
  }
  
