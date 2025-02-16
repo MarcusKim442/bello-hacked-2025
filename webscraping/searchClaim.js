@@ -1,11 +1,9 @@
-module.exports = { getResults };
-
 require("dotenv").config();
 const cheerio = require("cheerio");
 
-const sampleClaim = "the university of alberta is a top 10 university";
+const sampleClaim = "bananas are healthy for you";
 
-async function getResults(claim) {
+async function getResults(claim = sampleClaim) {
   const API_KEY = process.env.WEB_SCRAPING_API_KEY;
   const CX = process.env.WEB_SCRAPING_CX;
 
@@ -17,7 +15,7 @@ async function getResults(claim) {
     const response = await fetch(url); // Wait for the fetch to complete
     const data = await response.json(); // Wait for the JSON parsing to complete
     const ret = [];
-    for (const item of data.items.slice(0, 3)) {
+    for (const item of data.items) {
       const pageContent = await fetchPage(item.link); // Fetch full page content
       const text = extractRelevantText(pageContent);
       const res = {
@@ -62,12 +60,12 @@ function extractRelevantText(html) {
   return cleanedText.slice(0, 1000);
 }
 
-// async function main() {
-//   try {
-//     const data = await getResults(sampleClaim);
-//     console.log(data);
-//   } catch (error) {
-//     console.error("Error:", error);
-//   }
-// }
-// main();
+async function main() {
+  try {
+    const data = await getResults();
+    console.log(data);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+main();
