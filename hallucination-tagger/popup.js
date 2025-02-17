@@ -44,15 +44,30 @@ function displayClaimLabels(data) {
     console.log("displayClaimLabels", data)
     try {
         const container = document.getElementById("claim-card-container");
+        // const happyBanana = document.getElementById("happybanana");
+        // const sadBanana = document.getElementById("sadbanana");
         data.forEach((claim) => {
+            // if (claim.truth) {
+            //     happyBanana.style.display = "flex";
+                
+
+            // } else {
+            //     sadBanana.style.display = "flex";
+
+            // }
+            // const imageUrl = claim.truth ? "happy-banana.png" : "sad-banana.png";
+
             container.innerHTML += `
                 <div class="card">
                     <h3>"${claim.claim}"</h3>
-                    <p>${claim.truth ? "✅" : "❌"} ${claim.summary}</p>
+                    <p>${claim.summary}</p>
                     <a href="${claim.link}">${claim.title}</a>
+                    <br>
+                    <img src="${claim.truth ? "icons/happybanana.png" : "icons/sadbanana.png"}">
                 </div>
             `;
         });
+
     } catch (error) {
         console.log(error)
     }
