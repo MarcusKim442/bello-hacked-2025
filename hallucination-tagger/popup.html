@@ -12,11 +12,13 @@
 <body>
     <img src="" id="projectimage">
     <div class="input-container">
-      <div class="title">
-        <h2>Input Text to Fact Check <i class="fa-solid fa-check"></i></h2>
-        
+      <div class="logo">
+        <img src="icons/bananalyzelogo.png">
       </div>
-      <textarea id="userInput" placeholder="Enter text..."></textarea>
+      <!-- <div class="title">
+        <h2>Input Text toS Fact Check <i class="fa-solid fa-check"></i></h2>
+      </div> -->
+      <textarea id="userInput" placeholder="Input text to Bananalyze..."></textarea>
       <button id="check">SEARCH</button>
       <div id="loading">
         <img src="icons/bananaloading.gif">
@@ -24,16 +26,7 @@
       </div>
       
       <div id="outputarea" contenteditable="false" readonly placeholder="Sources..." style="display: none;"></div>
-      <div id="claim-card-container"></div>
-      <!-- <div class="banana-container">
-        <div id="happybanana">
-          <img src="icons/happy-banana.png">
-        </div>
-        <div id="sadbanana">
-          <img src="icons/sad-banana.png">
-        </div>
-      </div> -->
-      
+      <div id="claim-card-container"></div>      
   </div>
     
     <script src="popup.js"></script>

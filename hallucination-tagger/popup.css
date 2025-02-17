@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center; */
  }
- html, body, h2 {
+ html, body {
    border-radius: 25px;
    font-family: "Be Vietnam Pro", serif;
    font-weight: 300;
@@ -23,37 +23,27 @@
    align-items: center;
    justify-content: center;
    margin: 0 auto;
-   
-
+   transform-origin: top;
    
  }
 
 body {
-background-color: #FDFDF1;
+background-color: #fff9e3;
 }
  
- h2 {
-  
-   font-family: "Be Vietnam Pro", serif;
-   font-weight: 600;
-   width: 100%;
-   text-align: center;
-   color: #9F7E69;
-   
- }
- 
  .input-container {
-  
    width: 90%;
    max-width: 100%;
    margin: 0 auto;
    text-align: center; 
    max-width: 100%;
-   padding: 10px;
+   padding: 0px;
+   padding-top: 150px;
    color: #9F7E69;
+   justify-content: flex-start;
  }
  
- h2, textarea, #outputarea, button {
+ textarea, #outputarea, button {
   
    width: 100%;
    max-width: 100%;
@@ -103,7 +93,7 @@ background-color: #FDFDF1;
    width: 100%;
    height: 100px;
    margin-bottom: 10px;
-   border: 4px solid #F2EFC7;
+   border: 4px solid #fde7a7 ;
    border-radius: 15px;
    padding: 10px;
    color: #9F7E69;
@@ -112,7 +102,7 @@ background-color: #FDFDF1;
  }
  
  textarea:focus {
-   border: 4px solid #F2EFC7;
+   border: 4px solid #fde7a7 ;
    outline: none;
  }
  
@@ -126,7 +116,7 @@ background-color: #FDFDF1;
    width: 100%;
    height: 100px;
    margin-bottom: 10px;
-   border: 4px solid #F2EFC7;
+   border: 4px solid #fde7a7 ;
    overflow-y: auto; /* content no overflow*/
    border-radius: 15px;
    padding: 10px;
@@ -140,18 +130,18 @@ background-color: #FDFDF1;
   
    width: 100%;
    padding: 10px;
-   background-color: #F2EFC7;
+   background-color: #fde7a7 ;
    color: #9F7E69;
-   border: 4px solid #F2EFC7;
+   border: 4px solid #fde7a7 ;
    cursor: pointer;
    border-radius: 15px;
    outline: none;
  }
  
  button:hover {
-   background-color: #FDFDF1;
+   background-color: #fff9e3;
    color: #9F7E69;
-   border: 4px solid #F2EFC7;
+   border: 4px solid #fde7a7;
 
  }
 
@@ -218,3 +208,12 @@ background-color: #FDFDF1;
   line-height: 1.2;
 }
 
+.logo img {
+  width: auto;
+  height: auto;
+  max-width: 380px;
+  position: absolute;
+  z-index: -199;
+  top: -10px;
+  left: -20px;
+}

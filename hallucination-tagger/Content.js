@@ -8,7 +8,7 @@ document.addEventListener("mouseup", function () {
         let indicator = document.createElement("div");
         indicator.innerText = "🍌"; 
         indicator.style.position = "absolute";
-        indicator.style.background = "#FFFFFF";
+        indicator.style.background = "#fdfdf1";
         indicator.style.border = "2px solidrgb(209, 219, 156)";
         indicator.style.padding = "5px";
         indicator.style.cursor = "pointer";
