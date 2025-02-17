@@ -34,7 +34,7 @@ app.post("/extract-claims", async (req, res) => {
 
         console.log("Received text from extension:", text); // Debugging
 
-        const prompt = `Extract fact-like claims from the text below.
+        const prompt = `Extract fact-like claims from the text below without changing the original meaning of the selected text.
         Fact-like claims include:
         - Statistics (e.g., "60% of people prefer coffee over tea.")
         - Scientific statements (e.g., "Water boils at 100°C.")
@@ -54,7 +54,7 @@ app.post("/extract-claims", async (req, res) => {
 
         const response = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
-            messages: [{ role: "system", content: "You are a claim extraction assistant." }, { role: "user", content: prompt }]
+            messages: [{ role: "system", content: "You are a claim extraction assistant. Extract fact-like claims from the text below without changing the original meaning of the selected text." }, { role: "user", content: prompt }]
         });
 
         if (!response || !response.choices || response.choices.length === 0) {
