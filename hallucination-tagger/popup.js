@@ -48,7 +48,7 @@ function displayClaimLabels(data) {
             container.innerHTML += `
                 <div class="card">
                     <h3>"${claim.claim}"</h3>
-                    <p>${claim.summary}</p>
+                    <p>${claim.truth ? "✅" : "❌"} ${claim.summary}</p>
                     <a href="${claim.link}">${claim.title}</a>
                 </div>
             `;

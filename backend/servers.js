@@ -68,20 +68,26 @@ app.post("/extract-claims", async (req, res) => {
             return res.status(200).json({ claims: ["No valid claims found."] });
         }
 
-        const data = await ws.labelClaim(claims_[0]);
-        // const claims = [
-        //     `Claim: ${claims_[0]}`,
-        //     `${data.summary}`,
-        //     `Source: ${data.link}`
-        // ]
-        const claims = [
-            {
-                claim: claims_[0],
-                summary: data.summary,
-                link: data.link,
-                title: data.title,
+        const promiseList = [];
+        for (var i = 0; i < claims_.length; i++) {
+            if (i > 2) {
+                break;
             }
-        ]
+            promiseList.push(ws.labelClaim(claims_[i]));           
+        }
+        const results = await Promise.all(promiseList);
+        const claims = [];
+        var j = 0;
+        results.forEach((res) => {
+            claims.push({
+                claim: claims_[j],
+                summary: res.summary,
+                link: res.link,
+                title: res.title,
+                truth: res.truth
+            })
+            j++;
+        })
         
         res.status(200).json({ claims });
 
