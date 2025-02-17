@@ -172,6 +172,7 @@ background-color: #FDFDF1;
 #loading {
   display: none;
   position: relative;
+  flex-direction: column;
   top: 0;
   left: 0;
   width: 100%;
@@ -182,4 +183,16 @@ background-color: #FDFDF1;
 #loading img {
   width: 100%;
   height: 300px;
+}
+#loading p {
+  margin-top: 10px;
+  color: #9F7E69;
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  font-family: "Be Vietnam Pro", serif;
+  font-weight: 300;
+  margin-bottom: 0;
+  padding: 0;
+  line-height: 1.2;
 }
