@@ -64,6 +64,7 @@ function displayClaimLabels(data) {
                     <a href="${claim.link}">${claim.title}</a>
                     <br>
                     <img src="${claim.truth ? "icons/happybanana.png" : "icons/sadbanana.png"}">
+                    <p class="truth-caption ${claim.truth ? "text-green" : "text-red"}">This source ${claim.truth ? "agrees!" : "disagrees..."}</p>
                 </div>
             `;
         });
